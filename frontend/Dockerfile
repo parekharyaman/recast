@@ -14,5 +14,21 @@ RUN npm run build
 
 # Production stage
 FROM nginx:alpine
+
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy SSL certificates
+COPY certs/ /etc/nginx/certs/
+
+# Copy built application
 COPY --from=builder /app/dist /usr/share/nginx/html
-RUN pwd && ls -la /usr/share/nginx/html
+
+# Create logs directory
+RUN mkdir -p /var/log/nginx
+
+# Expose ports
+EXPOSE 80 443
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
