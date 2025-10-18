@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BACKEND_URL } from "./constants";
 
 type User = {
   id: number;
@@ -10,7 +11,7 @@ type User = {
 function App() {
   const [users, setUsers] = useState<User[]>([]);
   useEffect(() => {
-    fetch("http://localhost:5678")
+    fetch(BACKEND_URL)
       .then((res) => res.json())
       .then((data) => setUsers(data));
   }, []);
