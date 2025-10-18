@@ -16,9 +16,10 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copy nginx configuration
-# COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# No SSL certs needed when serving on port 80 only
+# Copy SSL certificates
+COPY certs/ /etc/nginx/certs/
 
 # Copy built application
 COPY --from=builder /app/dist /usr/share/nginx/html
@@ -26,10 +27,8 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Create logs directory
 RUN mkdir -p /var/log/nginx
 
-# Expose only port 80
-EXPOSE 80
-EXPOSE 443
-
+# Expose ports
+EXPOSE 80 443
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
