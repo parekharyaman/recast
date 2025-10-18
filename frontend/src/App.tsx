@@ -10,6 +10,7 @@ type User = {
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
+  console.log(BACKEND_URL);
   useEffect(() => {
     fetch(BACKEND_URL)
       .then((res) => res.json())
