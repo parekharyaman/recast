@@ -21,7 +21,7 @@
   "scripts": {
     "dev": "node --loader ts-node/esm src/index.ts",
     "build": "tsc",
-    "start": "node --loader ts-node/esm src/index.ts",
+    "start": "NODE_ENV=production node dist/index.js",
     "typeorm": "typeorm-ts-node-esm",
     "migrate": "npm run typeorm -- migration:run -d src/data-source.ts",
     "migrate:revert": "npm run typeorm -- migration:revert -d src/data-source.ts",
