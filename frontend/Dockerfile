@@ -28,6 +28,8 @@ RUN mkdir -p /var/log/nginx
 
 # Expose only port 80
 EXPOSE 80
+EXPOSE 443
+
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
