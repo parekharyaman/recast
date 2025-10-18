@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Recast",
   "type": "module",
-  "license": "",
+  "private": true,
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.10",
@@ -19,7 +19,9 @@
     "typeorm": "0.3.27"
   },
   "scripts": {
-    "start": "node --loader ts-node/esm src/index.ts",
+    "dev": "node --loader ts-node/esm src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "typeorm": "typeorm-ts-node-esm",
     "migrate": "npm run typeorm -- migration:run -d src/data-source.ts",
     "migrate:revert": "npm run typeorm -- migration:revert -d src/data-source.ts",
