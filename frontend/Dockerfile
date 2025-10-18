@@ -18,8 +18,7 @@ FROM nginx:alpine
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy SSL certificates
-COPY certs/ /etc/nginx/certs/
+# No SSL certs needed when serving on port 80 only
 
 # Copy built application
 COPY --from=builder /app/dist /usr/share/nginx/html
@@ -27,8 +26,8 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Create logs directory
 RUN mkdir -p /var/log/nginx
 
-# Expose ports
-EXPOSE 80 443
+# Expose only port 80
+EXPOSE 80
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]
