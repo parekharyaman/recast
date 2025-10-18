@@ -1,0 +1,26 @@
+{
+  "name": "recast",
+  "version": "0.0.1",
+  "description": "Awesome project developed with TypeORM.",
+  "type": "module",
+  "license": "",
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pg": "^8.14.1",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "0.3.27"
+  },
+  "scripts": {
+    "start": "node --loader ts-node/esm src/index.ts",
+    "typeorm": "typeorm-ts-node-esm",
+    "migrate": "npm run typeorm -- migration:run -d src/data-source.ts",
+    "migrate:revert": "npm run typeorm -- migration:revert -d src/data-source.ts",
+    "migrate:gen": "sh -c 'npm run typeorm -- migration:generate src/migration/\"$1\" -d src/data-source.ts' --"
+  }
+}
