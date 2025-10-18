@@ -9,6 +9,14 @@ const app = express();
 const PORT = Number(process.env.PORT);
 
 app.use(cors());
+app.use((req, res, next) => {
+  if (req.path.startsWith("/auth")) {
+    res.set("Cache-Control", "no-store");
+  } else {
+    res.set("Cache-Control", "no-cache");
+  }
+  next();
+});
 
 AppDataSource.initialize()
   .then(async () => {
