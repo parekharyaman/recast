@@ -21,6 +21,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Copy SSL certificates
 COPY certs/ /etc/nginx/certs/
 
+RUN pwd && ls -la /etc/nginx/certs
+
 # Copy built application
 COPY --from=builder /app/dist /usr/share/nginx/html
 
