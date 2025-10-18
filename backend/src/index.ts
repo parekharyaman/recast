@@ -13,7 +13,9 @@ app.use((req, res, next) => {
   if (req.path.startsWith("/auth")) {
     res.set("Cache-Control", "no-store");
   } else {
-    res.set("Cache-Control", "no-cache");
+    res.set("Cache-Control", "no-store, max-age=0, must-revalidate");
+    res.set("Pragma", "no-cache");
+    res.set("Expires", "0");
   }
   next();
 });
