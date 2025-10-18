@@ -4,27 +4,29 @@
   "description": "Recast",
   "type": "module",
   "private": true,
-  "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.13.10",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.2"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "pg": "^8.14.1",
-    "reflect-metadata": "^0.2.2",
-    "typeorm": "0.3.27"
-  },
   "scripts": {
-    "dev": "node --loader ts-node/esm src/index.ts",
+    "dev": "nodemon --watch src/ --ext ts --exec node --loader ts-node/esm src/index.ts",
     "build": "tsc",
     "start": "NODE_ENV=production node dist/index.js",
     "typeorm": "typeorm-ts-node-esm",
     "migrate": "npm run typeorm -- migration:run -d src/data-source.ts",
     "migrate:revert": "npm run typeorm -- migration:revert -d src/data-source.ts",
     "migrate:gen": "sh -c 'npm run typeorm -- migration:generate src/migration/\"$1\" -d src/data-source.ts' --"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "pg": "^8.14.1",
+    "reflect-metadata": "^0.2.2",
+    "typeorm": "0.3.27"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
   }
 }
