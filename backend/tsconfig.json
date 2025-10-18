@@ -9,6 +9,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "esModuleInterop": true
   }
 }
