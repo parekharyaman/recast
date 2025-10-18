@@ -6,6 +6,8 @@ import cors from "cors";
 
 dotenv.config();
 const app = express();
+const PORT = Number(process.env.PORT);
+
 app.use(cors());
 
 AppDataSource.initialize()
@@ -16,8 +18,8 @@ AppDataSource.initialize()
     app.get("/", (req, res) => {
       res.send(users);
     });
-    app.listen(process.env.PORT, () => {
-      console.log(`Server is running on port ${process.env.PORT}`);
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
     });
   })
   .catch((error) => console.log(error));
