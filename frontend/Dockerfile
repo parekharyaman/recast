@@ -1,4 +1,5 @@
 FROM nginx:alpine
 RUN pwd && ls -la
+RUN ls -la ./root
 COPY ./dist /usr/share/nginx/html
 RUN pwd && ls -la /usr/share/nginx/html
