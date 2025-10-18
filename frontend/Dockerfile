@@ -16,7 +16,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copy nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+# COPY nginx.conf /etc/nginx/nginx.conf
 
 # No SSL certs needed when serving on port 80 only
 
