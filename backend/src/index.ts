@@ -21,8 +21,8 @@ app.use((req, res, next) => {
 AppDataSource.initialize()
   .then(async () => {
     const manager = AppDataSource.manager;
-    const users = await manager.find(User);
-    app.get("/", (_, res) => {
+    app.get("/", async (_, res) => {
+      const users = await manager.find(User);
       res.send(users);
     });
     app.listen(PORT, () => {
