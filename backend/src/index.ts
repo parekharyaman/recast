@@ -9,7 +9,14 @@ dotenv.config();
 const app = express();
 const PORT = Number(process.env.PORT);
 
-app.use(cors());
+// Configure CORS to allow credentialed requests from the frontend
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+app.use(
+  cors({
+    origin: FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(clerkMiddleware());
 app.use((req, res, next) => {
   res.set("Cache-Control", "no-store, max-age=0, must-revalidate");
