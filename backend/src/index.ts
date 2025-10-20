@@ -3,20 +3,18 @@ import dotenv from "dotenv";
 import express from "express";
 import { User } from "./entity/User.js";
 import cors from "cors";
+import { clerkClient, clerkMiddleware, getAuth } from "@clerk/express";
 
 dotenv.config();
 const app = express();
 const PORT = Number(process.env.PORT);
 
 app.use(cors());
+app.use(clerkMiddleware());
 app.use((req, res, next) => {
-  if (req.path.startsWith("/auth")) {
-    res.set("Cache-Control", "no-store");
-  } else {
-    res.set("Cache-Control", "no-store, max-age=0, must-revalidate");
-    res.set("Pragma", "no-cache");
-    res.set("Expires", "0");
-  }
+  res.set("Cache-Control", "no-store, max-age=0, must-revalidate");
+  res.set("Pragma", "no-cache");
+  res.set("Expires", "0");
   next();
 });
 
@@ -26,6 +24,21 @@ AppDataSource.initialize()
     app.get("/", async (_, res) => {
       const users = await manager.find(User);
       res.send(users);
+    });
+    app.get("/user", async (req, res) => {
+      // Use `getAuth()` to access `isAuthenticated` and the user's ID
+      const { isAuthenticated, userId } = getAuth(req);
+
+      // If user isn't authenticated, return a 401 error
+      if (!isAuthenticated) {
+        return res.status(401).json({ error: "User not authenticated" });
+      }
+
+      // Use `clerkClient` to access Clerk's JS Backend SDK methods
+      // and get the user's User object
+      const user = await clerkClient.users.getUser(userId);
+
+      res.json(user);
     });
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
