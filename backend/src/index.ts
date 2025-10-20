@@ -1,7 +1,6 @@
 import { AppDataSource } from "./data-source.js";
 import dotenv from "dotenv";
 import express from "express";
-import { User } from "./entity/User.js";
 import cors from "cors";
 import { clerkClient, clerkMiddleware, getAuth } from "@clerk/express";
 
@@ -29,8 +28,7 @@ AppDataSource.initialize()
   .then(async () => {
     const manager = AppDataSource.manager;
     app.get("/", async (_, res) => {
-      const users = await manager.find(User);
-      res.send(users);
+      res.send("Hello World");
     });
     app.get("/user", async (req, res) => {
       // Use `getAuth()` to access `isAuthenticated` and the user's ID
