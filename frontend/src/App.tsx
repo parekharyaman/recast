@@ -1,32 +1,19 @@
-import { useEffect, useState } from "react";
-import { BACKEND_URL } from "./constants";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
-type User = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  age: number;
-};
-
-function App() {
-  const [users, setUsers] = useState<User[]>([]);
-  console.log(BACKEND_URL);
-  useEffect(() => {
-    fetch(BACKEND_URL)
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, []);
-
+export default function App() {
   return (
-    <>
-      <div>Recast</div>
-      <div>
-        {users.map((user: User) => (
-          <div key={user.id}>{user.firstName}</div>
-        ))}
-      </div>
-    </>
+    <header>
+      <SignedOut>
+        <SignInButton />
+      </SignedOut>
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+    </header>
   );
 }
-
-export default App;
