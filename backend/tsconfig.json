@@ -2,8 +2,10 @@
   "compilerOptions": {
     "target": "ES2021",
     "lib": ["ES2021"],
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+
+    // Keep ESM in source; let tooling handle extensionless imports
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
 
     "rootDir": "./src",
     "outDir": "./dist",
@@ -12,14 +14,20 @@
     "strict": true,
     "strictPropertyInitialization": false,
 
+    // Interop conveniences
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "types": ["node"],
 
+    // Decorators (e.g., TypeORM)
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
 
+    // Keep import/export syntax as-is (no rewriting)
+    "verbatimModuleSyntax": true,
+
+    // Utilities
     "resolveJsonModule": true
   },
   "include": ["src/**/*.ts"],
